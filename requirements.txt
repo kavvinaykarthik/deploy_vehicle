@@ -1,6 +1,5 @@
 streamlit
-opencv-python
+opencv-python-headless
 numpy
 mediapipe
-playsound==1.2.2
 requests
