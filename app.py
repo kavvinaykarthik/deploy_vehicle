@@ -4,8 +4,7 @@ import numpy as np
 import mediapipe as mp
 import time
 import requests
-import threading
-from playsound import playsound
+
 # Backend URL (Update with actual AWS endpoint)
 API_URL = "http://65.2.10.134:8000"  # Replace with your backend URL
 
@@ -27,12 +26,6 @@ HEAD_TURN_TIME_THRESHOLD = 2
 # Alert timing
 last_alert_time = 0
 ALERT_INTERVAL = 5  # Minimum time (seconds) between alerts
-
-# Load a buzzer sound file (you can replace this with your own buzzer sound)
-buzzer_wave = sa.WaveObject.from_wave_file("buzzer.wav")  # Ensure you have a buzzer.wav file
-
-def play_buzzer():
-    playsound("buzzer.wav")
 
 def get_landmark_coords(face_landmarks, indices, w, h):
     return [(int(face_landmarks.landmark[i].x * w), int(face_landmarks.landmark[i].y * h)) for i in indices]
@@ -108,7 +101,6 @@ elif option == "Driver Monitoring System":
                             eye_closed_start = time.time()
                         elif time.time() - eye_closed_start > DROWSINESS_TIME_THRESHOLD:
                             alert_message = "⚠️ Warning! Drowsiness detected. Slow down!"
-                            play_buzzer()
                     else:
                         eye_closed_start = None
 
@@ -119,7 +111,6 @@ elif option == "Driver Monitoring System":
                             head_turn_start = time.time()
                         elif time.time() - head_turn_start > HEAD_TURN_TIME_THRESHOLD:
                             alert_message = "⚠️ Please look straight at the road!"
-                            play_buzzer()
                     else:
                         head_turn_start = None
 
