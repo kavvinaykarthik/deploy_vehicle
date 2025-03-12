@@ -2,5 +2,5 @@ streamlit
 opencv-python
 numpy
 mediapipe
-simpleaudio
+playsound
 requests
